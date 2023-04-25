@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * @file
+ * Добавление/удаление контента при установке/удалении модуля.
+ */
+
+/**
+ * @return void
+ * Implements hook_install().
+ * Создание типа материала products и словаря shop_taste
+ */
 function mvc_example_install() {
   if (!in_array('products', node_type_get_names())) {
     $type = array(
@@ -30,7 +40,7 @@ function mvc_example_install() {
 /**
  * @return void
  * @throws Exception
- *
+ * Implements hook_uninstall().
  * Удаление bundle и его контента при удалении модуля
  */
 function mvc_example_uninstall() {
@@ -56,8 +66,8 @@ function mvc_example_uninstall() {
 /**
  * @return void
  * @throws FieldException
- *
- * Создаем поле при включении модуля
+ * Implements hook_enable().
+ * Создание полей при включении модуля
  */
 function mvc_example_enable() {
   $fields = [
@@ -150,9 +160,9 @@ function mvc_example_enable() {
 }
 
 /**
- * Implements hook_disable().
- *
- * Удаляем поле при отключении модуля
+ * @return void
+ * Implements hook_disable()
+ * Удаление полей при отключении модуля
  */
 function mvc_example_disable() {
   $fields = [
