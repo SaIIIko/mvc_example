@@ -49,8 +49,159 @@ function mvc_example_uninstall() {
   drupal_set_message('The content type "Products" has been deleted.');
 
   // Удаляем словарь
-  $vocabulary = taxonomy_vocabulary_machine_name_load('shop_countries');
+  $vocabulary = taxonomy_vocabulary_machine_name_load('shop_taste');
   taxonomy_vocabulary_delete($vocabulary->vid);
+}
+
+/**
+ * @return void
+ * @throws FieldException
+ *
+ * Создаем поле при включении модуля
+ */
+function mvc_example_enable() {
+  $fields = [
+    [
+      'field_name' => 'product_price',
+      'type' => 'number_decimal',
+      'entity' => 'node',
+      'bundle' => 'products',
+      'label' => 'Стоимость'
+    ],
+    [
+      'field_name' => 'product_fat_content',
+      'type' => 'number_decimal',
+      'entity' => 'node',
+      'bundle' => 'products',
+      'label' => 'Жирность, %'
+    ],
+    [
+      'field_name' => 'product_weight',
+      'type' => 'number_integer',
+      'entity' => 'node',
+      'bundle' => 'products',
+      'label' => 'Вес, г'
+    ],
+    [
+      'field_name' => 'product_proteins',
+      'type' => 'number_integer',
+      'entity' => 'node',
+      'bundle' => 'products',
+      'label' => 'Белки в 100 г'
+    ],
+    [
+      'field_name' => 'product_carbohydrates',
+      'type' => 'number_integer',
+      'entity' => 'node',
+      'bundle' => 'products',
+      'label' => 'Углеводы в 100 г'
+    ],
+    [
+      'field_name' => 'product_fats',
+      'type' => 'number_integer',
+      'entity' => 'node',
+      'bundle' => 'products',
+      'label' => 'Жиры в 100 г'
+    ],
+    [
+      'field_name' => 'product_image',
+      'type' => 'image',
+      'entity' => 'node',
+      'bundle' => 'products',
+      'label' => 'Фото'
+    ],
+    [
+      'field_name' => 'product_taste',
+      'type' => 'taxonomy_term_reference',
+      'entity' => 'node',
+      'bundle' => 'products',
+      'label' => 'Вкус',
+      'settings' => array(
+        'allowed_values' => array(
+          array(
+            'vocabulary' => 'shop_taste',
+            'parent' => 0
+          )
+        )
+      )
+    ],
+    [
+      'field_name' => 'product_expiration_date',
+      'type' => 'text',
+      'entity' => 'node',
+      'bundle' => 'products',
+      'label' => 'Срок годности'
+    ],
+  ];
+
+  foreach ($fields as $field) {
+    field_create_field($field);
+
+    // Подключаем поле к нашему типу.
+    $instance = array(
+      'field_name' => $field['field_name'],
+      'entity_type' => $field['entity'],
+      'bundle' => $field['bundle'],
+      'label' => $field['label'],
+    );
+
+    field_create_instance($instance);
+  }
+}
+
+/**
+ * Implements hook_disable().
+ *
+ * Удаляем поле при отключении модуля
+ */
+function mvc_example_disable() {
+  $fields = [
+    [
+      'field_name' => 'product_price',
+      'entity_type' => 'node',
+      'bundle' => 'products',
+    ],
+    [
+      'field_name' => 'product_fat_content',
+      'entity_type' => 'node',
+      'bundle' => 'products',
+    ],
+    [
+      'field_name' => 'product_proteins',
+      'entity_type' => 'node',
+      'bundle' => 'products',
+    ],
+    [
+      'field_name' => 'product_carbohydrates',
+      'entity_type' => 'node',
+      'bundle' => 'products',
+    ],
+    [
+      'field_name' => 'product_fats',
+      'entity_type' => 'node',
+      'bundle' => 'products',
+    ],
+    [
+      'field_name' => 'product_image',
+      'entity_type' => 'node',
+      'bundle' => 'products',
+    ],
+    [
+      'field_name' => 'product_taste',
+      'entity_type' => 'node',
+      'bundle' => 'products',
+    ],
+    [
+      'field_name' => 'product_expiration_date',
+      'entity_type' => 'node',
+      'bundle' => 'products',
+    ]
+  ];
+
+  foreach ($fields as $instance) {
+    field_delete_instance($instance);
+    field_delete_field($instance['field_name']);
+  }
 }
 
 
