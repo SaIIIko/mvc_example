@@ -1,0 +1,19 @@
+<?php
+
+function mvc_example_install() {
+  if (!in_array('products', node_type_get_names())) {
+    $type = array(
+      'type' => 'products',
+      'name' => st('Products'),
+      'base' => 'node_content',
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+      'title_label' => 'Товары'
+    );
+
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+  }
+
+}
