@@ -1,0 +1,6 @@
+name = 'MVC example'
+description = 'Пример реализация модуля по принципу MVC <a href="/example_mvc">ткнуть по ссылке</a>'
+package = 'custom'
+core = 7.x
+version = '7.x-1.0'
+project = 'mvc_example'
