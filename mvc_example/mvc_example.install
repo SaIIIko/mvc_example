@@ -17,3 +17,26 @@ function mvc_example_install() {
   }
 
 }
+
+/**
+ * @return void
+ * @throws Exception
+ *
+ * Удаление bundle и его контента при удалении модуля
+ */
+function mvc_example_uninstall() {
+  // Node delete
+  $query = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->condition('n.type', 'products');
+  $nids = $query->execute()->fetchCol();
+
+  if (!empty($nids)) {
+    node_delete_multiple($nids);
+  }
+
+  node_type_delete('products');
+  drupal_flush_all_caches();
+  drupal_set_message('The content type "Products" has been deleted.');
+}
+
