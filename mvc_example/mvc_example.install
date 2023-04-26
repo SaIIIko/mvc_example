@@ -6,9 +6,10 @@
  */
 
 /**
- * @return void
  * Implements hook_install().
  * Создание типа материала products и словаря shop_taste
+ *
+ * @return void
  */
 function mvc_example_install() {
   if (!in_array('products', node_type_get_names())) {
@@ -35,13 +36,23 @@ function mvc_example_install() {
     $vocabulary->module = 'taxonomy';
     taxonomy_vocabulary_save($vocabulary);
   }
+
+  # Создание словаря таксономии Бренды
+  if(!in_array('shop_brands', taxonomy_get_vocabularies())) {
+    $vocabulary = new stdClass();
+    $vocabulary->name = 'Бренды';
+    $vocabulary->machine_name = "shop_brands";
+    $vocabulary->module = 'taxonomy';
+    taxonomy_vocabulary_save($vocabulary);
+  }
 }
 
 /**
- * @return void
- * @throws Exception
  * Implements hook_uninstall().
  * Удаление bundle и его контента при удалении модуля
+ *
+ * @return void
+ * @throws Exception
  */
 function mvc_example_uninstall() {
   // Node delete
@@ -58,16 +69,21 @@ function mvc_example_uninstall() {
   drupal_flush_all_caches();
   drupal_set_message('The content type "Products" has been deleted.');
 
-  // Удаляем словарь
+  # Удаление словаря Вкусы
   $vocabulary = taxonomy_vocabulary_machine_name_load('shop_taste');
+  taxonomy_vocabulary_delete($vocabulary->vid);
+
+  # Удаление словаря Бренды
+  $vocabulary = taxonomy_vocabulary_machine_name_load('shop_brands');
   taxonomy_vocabulary_delete($vocabulary->vid);
 }
 
 /**
- * @return void
- * @throws FieldException
  * Implements hook_enable().
  * Создание полей при включении модуля
+ *
+ * @return void
+ * @throws FieldException
  */
 function mvc_example_enable() {
   $fields = [
@@ -160,9 +176,10 @@ function mvc_example_enable() {
 }
 
 /**
- * @return void
  * Implements hook_disable()
  * Удаление полей при отключении модуля
+ *
+ * @return void
  */
 function mvc_example_disable() {
   $fields = [
