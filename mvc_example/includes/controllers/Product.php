@@ -1,26 +1,63 @@
 <?php
 
-class Product implements ProductInterface {
+abstract class Product implements ProductInterface {
 
   /**
-   * @inheritDoc
+   * The product name.
+   *
+   * @var string
+   */
+  protected $name;
+
+  /**
+   * The product price.
+   *
+   * @var string
+   */
+  protected $price;
+
+  /**
+   * The product brand.
+   *
+   * @var string|null
+   */
+  protected $brand;
+
+  /**
+   * Produce constructor.
+   *
+   * @param string $name
+   *   The product name
+   * @param int $price
+   *   The product name
+   * @param null|string $brand
+   *   The product value
+   */
+  public function __construct($name, $price, $brand = NULL) {
+    $this->name = $name;
+    $this->price = $price;
+    $this->brand = $brand;
+  }
+
+  /**
+   * @return string
    */
   public function getName() {
-    // TODO: Implement getName() method.
+    return $this->name;
   }
 
   /**
-   * @inheritDoc
+   * @return int
    */
   public function getPrice() {
-    // TODO: Implement getPrice() method.
+    return $this->price;
   }
 
   /**
-   * @inheritDoc
+   * @return string|null
    */
   public function getBrand() {
-    // TODO: Implement getBrand() method.
+    return $this->brand;
   }
 
 }

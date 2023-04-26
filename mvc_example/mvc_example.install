@@ -27,7 +27,7 @@ function mvc_example_install() {
     node_add_body_field($type);
   }
 
-  // Создание словаря таксономии
+  # Создание словаря таксономии Вкусы
   if(!in_array('shop_taste', taxonomy_get_vocabularies())) {
     $vocabulary = new stdClass();
     $vocabulary->name = 'Вкусы';
