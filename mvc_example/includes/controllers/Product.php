@@ -48,23 +48,41 @@ abstract class Product implements ProductInterface {
   }
 
   /**
-   * @return null|string
+   * @return string
    */
   public function getName() {
-    return $this->name;
+    $result = db_query("
+      SELECT title
+      FROM {node}
+      WHERE nid = :nid",
+        array(':nid' => $this->id))->fetchField();
+
+    return $result;
   }
 
   /**
    * @return null|int
    */
   public function getPrice() {
-    return $this->price;
+    $result = db_query("
+      SELECT product_price_value
+      FROM {field_data_product_price}
+      WHERE entity_id = :nid",
+      array(':nid' => $this->id))->fetchField();
+    return $result;
   }
 
   /**
-   * @return null|string
+   * @return null|array
    */
   public function getBrand() {
-    return $this->brand;
+    $result =  db_query("
+      SELECT name
+      FROM {field_data_product_brand} pb
+      INNER JOIN {taxonomy_term_data} t ON pb.product_brand_tid = t.tid
+      WHERE entity_id = :nid",
+      array(':nid' => $this->id))->fetchAll();
+
+    return $result;
   }
 }
