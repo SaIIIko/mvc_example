@@ -4,6 +4,13 @@
  * Interface for Product.
  */
 interface ProductInterface {
+  /**
+   * Get product id
+   *
+   * @return string
+   *   The product id
+   */
+  public function getId();
 
   /**
    * Get product name

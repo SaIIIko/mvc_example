@@ -3,6 +3,13 @@
 abstract class Product implements ProductInterface {
 
   /**
+   * The product id.
+   *
+   * @var int
+   */
+  protected $id;
+
+  /**
    * The product name.
    *
    * @var string
@@ -12,52 +19,52 @@ abstract class Product implements ProductInterface {
   /**
    * The product price.
    *
-   * @var string
+   * @var null|int
    */
   protected $price;
 
   /**
    * The product brand.
    *
-   * @var string|null
+   * @var null|string
    */
   protected $brand;
 
   /**
    * Produce constructor.
    *
-   * @param string $name
-   *   The product name
-   * @param int $price
-   *   The product name
-   * @param null|string $brand
-   *   The product value
+   * @param int $id
+   *   The product id
    */
-  public function __construct($name, $price, $brand = NULL) {
-    $this->name = $name;
-    $this->price = $price;
-    $this->brand = $brand;
+  public function __construct($id) {
+    $this->id = $id;
   }
 
   /**
-   * @return string
+   * @return int
+   */
+  public function getId() {
+    return $this->id;
+  }
+
+  /**
+   * @return null|string
    */
   public function getName() {
     return $this->name;
   }
 
   /**
-   * @return int
+   * @return null|int
    */
   public function getPrice() {
     return $this->price;
   }
 
   /**
-   * @return string|null
+   * @return null|string
    */
   public function getBrand() {
     return $this->brand;
   }
-
 }

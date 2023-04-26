@@ -1,1 +1,36 @@
 <?php
+
+function mvc_example_menu() {
+  $items = [];
+
+  /*$items['mvc_example'] = [
+    'type' => MENU_NORMAL_ITEM,
+    'title' => t('Shop'),
+    'description' => 'My custom and very special page',
+    'page callback' => 'mvc_example_shop_page',
+    'access callback' => TRUE,
+    'access arguments' => array('access content'),
+  ];*/
+
+
+  $items['mvc_example/products/%'] = [
+    'type' => MENU_NORMAL_ITEM,
+    'title' => t('Shop'),
+    'description' => 'My custom and very special page',
+    'page callback' => 'ProductBase::load',
+    'page arguments' => array(2),
+    'access callback' => TRUE,
+    'access arguments' => array('access content'),
+  ];
+
+  return $items;
+}
+
+function mvc_example_theme() {
+  return array(
+    'my_template' => array(
+      'template' => 'includes/views/my-template',
+      'render element' => 'element',
+    ),
+  );
+}
