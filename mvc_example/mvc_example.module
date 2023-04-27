@@ -8,6 +8,16 @@ function mvc_example_menu() {
     'title' => '',
     'description' => 'Product page',
     'page callback' => 'ProductLoad::load',
+    'page arguments' => array(2),
+    'access callback' => TRUE,
+    'access arguments' => array('access content'),
+  ];
+
+  $items['mvc_example/products/yogurt/%'] = [
+    'type' => MENU_NORMAL_ITEM,
+    'title' => '',
+    'description' => 'Product yogurt page',
+    'page callback' => 'ProductYogurtLoad::load',
     'page arguments' => array(3),
     'access callback' => TRUE,
     'access arguments' => array('access content'),
@@ -16,13 +26,34 @@ function mvc_example_menu() {
   return $items;
 }
 
+/**
+ * Implements hook_preprocess().
+ */
+function mvc_example_preprocess_page(&$variables) {
+
+  /*$test = new ProductBuild(51);
+
+  dpm($test->getProductType());*/
+}
+
 function mvc_example_theme() {
   return array(
     'product_template' => array(
       'template' => 'includes/views/product',
       'render element' => 'element',
     ),
+    'product_yogurt_template' => array(
+      'template' => 'includes/views/product-yogurt',
+      'render element' => 'element',
+    ),
   );
+}
+
+function template_preprocess_product_yogurt_template(&$vars) {
+  drupal_add_css(drupal_get_path('module', 'mvc_example') . '/css/product.css', array(
+    'weight' => 100,
+    'group' => CSS_THEME,
+  ));
 }
 
 function template_preprocess_product_template(&$vars) {

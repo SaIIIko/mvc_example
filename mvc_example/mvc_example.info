@@ -5,8 +5,9 @@ core = 7.x
 version = '7.x-1.0'
 project = 'mvc_example'
 
-files[] = includes/controllers/TestController.php
 files[] = includes/controllers/Product.php
 files[] = includes/controllers/ProductInterface.php
-files[] = includes/controllers/ProductBase.php
-files[] = includes/controllers/ProductYogurt.php
+files[] = includes/controllers/ProductBuild.php
+files[] = includes/controllers/ProductLoad.php
+files[] = includes/controllers/ProductYogurtBuild.php
+files[] = includes/controllers/ProductYogurtLoad.php

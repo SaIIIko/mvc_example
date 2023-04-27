@@ -1,5 +1,5 @@
 <?php if ($data): ?>
-  <div class="product__full">
+  <div class="product__full product-yogurt__full">
     <div class="product__full-wrap">
       <div class="product__left">
         <img src="/sites/all/modules/custom/mvc_example/img/no_image.jpg" alt="">
@@ -33,6 +33,36 @@
                 <?php print 'Срок годности истек!' ?>
               <?php endif; ?>
             </div>
+          </div>
+        <?php endif; ?>
+        <?php if ($data['product_fat_content_value']): ?>
+          <div class="attr-item">
+            <div class="title">Жирность, %:</div>
+            <div class="value"><?php print $data['product_fat_content_value'] ?></div>
+          </div>
+        <?php endif; ?>
+        <?php if ($data['product_proteins_value']): ?>
+          <div class="attr-item">
+            <div class="title">Белки в 100 г:</div>
+            <div class="value"><?php print $data['product_proteins_value'] ?></div>
+          </div>
+        <?php endif; ?>
+        <?php if ($data['product_fats_value']): ?>
+          <div class="attr-item">
+            <div class="title">Жиры в 100 г:</div>
+            <div class="value"><?php print $data['product_fats_value'] ?></div>
+          </div>
+        <?php endif; ?>
+        <?php if ($data['product_carbohydrates_value']): ?>
+          <div class="attr-item">
+            <div class="title">Углеводы в 100 г:</div>
+            <div class="value"><?php print $data['product_carbohydrates_value'] ?></div>
+          </div>
+        <?php endif; ?>
+        <?php if ($data['product_weight_value']): ?>
+          <div class="attr-item">
+            <div class="title">Вес:</div>
+            <div class="value"><?php print $data['product_weight_value'] ?></div>
           </div>
         <?php endif; ?>
       </div>
