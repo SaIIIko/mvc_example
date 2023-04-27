@@ -14,12 +14,19 @@ abstract class Product implements ProductInterface {
   protected $id;
 
   /**
+   * The product name.
+   * @var string
+   */
+  protected $name;
+
+  /**
    * Produce constructor.
    * @param int $id
    *   The product id
    */
   public function __construct($id) {
     $this->id = $id;
+    $this->name = $this->getName();
   }
 
   /**
@@ -135,5 +142,36 @@ abstract class Product implements ProductInterface {
     } else {
       return 'end';
     }
+  }
+
+  /**
+   * Displaying basic information if the object is called as a string
+   * @return string
+   */
+  public function __toString() {
+    return 'Product id: '.$this->id
+      . '<br>'
+      . 'Product name: '.$this->name;
+  }
+
+  /**
+   * Displaying a message when trying to call a non-existent method
+   *
+   * @param $methodName
+   * @param $arguments
+   *
+   * @return void
+   */
+  public function __call($methodName, $arguments) {
+    drupal_set_message('Вы вызвали несуществующий метод');
+  }
+
+  /**
+   * Displaying a message when trying to call an object as a function
+   *
+   * @return void
+   */
+  public function __invoke() {
+    drupal_set_message('Объект вызвали в виде функции');
   }
 }

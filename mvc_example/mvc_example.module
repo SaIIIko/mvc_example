@@ -31,16 +31,6 @@ function mvc_example_menu() {
 }
 
 /**
- * Implements hook_preprocess().
- */
-function mvc_example_preprocess_page(&$variables) {
-
-  /*$test = new ProductBuild(51);
-
-  dpm($test->getProductType());*/
-}
-
-/**
  * Implements hook_theme().
  * Add templates for default and custom products
  */
