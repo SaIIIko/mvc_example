@@ -15,6 +15,11 @@ img {
   .product__full-wrap .product__right {
     width: 55%; }
 
+.product-yogurt__full .product__full-wrap .product__left {
+  order: 2; }
+.product-yogurt__full .product__full-wrap .product__right {
+  order: 1; }
+
 .attr-item {
   display: flex;
   margin-bottom: 10px;
