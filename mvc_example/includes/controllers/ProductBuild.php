@@ -4,7 +4,7 @@ class ProductBuild extends Product {
 
   /**
    * Get specific fields from product
-   * 
+   *
    * @return array
    */
   protected function getProductCustomFields () {
@@ -24,7 +24,7 @@ class ProductBuild extends Product {
    * @return mixed
    * @throws \Exception
    */
-  protected function buildFieldsArray() {
+  public function buildFieldsArray() {
     $fields_arr = $this->getProductCustomFields();
     $fields_arr['title'] = $this->getName();
     $fields_arr['brand'] = $this->getBrand();
