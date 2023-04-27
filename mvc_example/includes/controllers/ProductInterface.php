@@ -1,8 +1,10 @@
 <?php
 
 /**
- * Interface for Product.
+ * @file
+ * Interface for creation Product.
  */
+
 interface ProductInterface {
   /**
    * Get product id

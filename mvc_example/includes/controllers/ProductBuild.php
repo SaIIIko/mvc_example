@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Class builder default product type fields
+ */
+
 class ProductBuild extends Product {
 
   /**

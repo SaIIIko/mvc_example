@@ -1,8 +1,10 @@
 <?php
 
 /**
+ * @file
  * Class represents loader for hook menu callback
  */
+
 class ProductLoad {
 
   /**
