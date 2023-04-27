@@ -1,17 +1,20 @@
 <?php
 
+/**
+ * @file
+ * Base object for receipt product.
+ */
+
 abstract class Product implements ProductInterface {
 
   /**
    * The product id.
-   *
    * @var int
    */
   protected $id;
 
   /**
    * Produce constructor.
-   *
    * @param int $id
    *   The product id
    */
@@ -20,6 +23,7 @@ abstract class Product implements ProductInterface {
   }
 
   /**
+   * Get product id
    * @return int
    */
   public function getId() {
@@ -70,6 +74,22 @@ abstract class Product implements ProductInterface {
     }
 
     return $result;
+  }
+
+  /**
+   * Get product type
+   * @return null|array
+   */
+  public function getProductType() {
+    $result =  db_query("
+      SELECT t.name,
+             t.tid
+      FROM {field_data_product_type} pt
+      INNER JOIN {taxonomy_term_data} t ON pt.product_type_tid = t.tid
+      WHERE pt.entity_id = :nid",
+      array(':nid' => $this->id))->fetchAll(PDO::FETCH_ASSOC);
+
+    return reset($result);
   }
 
   /**
