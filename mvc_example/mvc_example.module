@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Implements hook_menu().
+ * Add pages for demos
+ */
 function mvc_example_menu() {
   $items = [];
 
@@ -36,6 +40,10 @@ function mvc_example_preprocess_page(&$variables) {
   dpm($test->getProductType());*/
 }
 
+/**
+ * Implements hook_theme().
+ * Add templates for default and custom products
+ */
 function mvc_example_theme() {
   return array(
     'product_template' => array(
@@ -49,6 +57,10 @@ function mvc_example_theme() {
   );
 }
 
+/**
+ * Implements hook_template().
+ * Add css file
+ */
 function template_preprocess_product_yogurt_template(&$vars) {
   drupal_add_css(drupal_get_path('module', 'mvc_example') . '/css/product.css', array(
     'weight' => 100,
@@ -56,6 +68,10 @@ function template_preprocess_product_yogurt_template(&$vars) {
   ));
 }
 
+/**
+ * Implements hook_template().
+ * Add css file
+ */
 function template_preprocess_product_template(&$vars) {
   drupal_add_css(drupal_get_path('module', 'mvc_example') . '/css/product.css', array(
     'weight' => 100,
