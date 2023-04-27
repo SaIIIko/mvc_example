@@ -3,22 +3,12 @@
 function mvc_example_menu() {
   $items = [];
 
-  /*$items['mvc_example'] = [
-    'type' => MENU_NORMAL_ITEM,
-    'title' => t('Shop'),
-    'description' => 'My custom and very special page',
-    'page callback' => 'mvc_example_shop_page',
-    'access callback' => TRUE,
-    'access arguments' => array('access content'),
-  ];*/
-
-
   $items['mvc_example/products/%'] = [
     'type' => MENU_NORMAL_ITEM,
-    'title' => t('Shop'),
-    'description' => 'My custom and very special page',
-    'page callback' => 'ProductBase::load',
-    'page arguments' => array(2),
+    'title' => '',
+    'description' => 'Product page',
+    'page callback' => 'ProductLoad::load',
+    'page arguments' => array(3),
     'access callback' => TRUE,
     'access arguments' => array('access content'),
   ];
@@ -28,9 +18,16 @@ function mvc_example_menu() {
 
 function mvc_example_theme() {
   return array(
-    'my_template' => array(
-      'template' => 'includes/views/my-template',
+    'product_template' => array(
+      'template' => 'includes/views/product',
       'render element' => 'element',
     ),
   );
+}
+
+function template_preprocess_product_template(&$vars) {
+  drupal_add_css(drupal_get_path('module', 'mvc_example') . '/css/product.css', array(
+    'weight' => 100,
+    'group' => CSS_THEME,
+  ));
 }
