@@ -45,6 +45,15 @@ function mvc_example_install() {
     $vocabulary->module = 'taxonomy';
     taxonomy_vocabulary_save($vocabulary);
   }
+
+  # Создание словаря таксономии Тип продукции
+  if(!in_array('shop_product_type', taxonomy_get_vocabularies())) {
+    $vocabulary = new stdClass();
+    $vocabulary->name = 'Тип продукции';
+    $vocabulary->machine_name = "shop_product_type";
+    $vocabulary->module = 'taxonomy';
+    taxonomy_vocabulary_save($vocabulary);
+  }
 }
 
 /**
@@ -75,6 +84,10 @@ function mvc_example_uninstall() {
 
   # Удаление словаря Бренды
   $vocabulary = taxonomy_vocabulary_machine_name_load('shop_brands');
+  taxonomy_vocabulary_delete($vocabulary->vid);
+
+  # Удаление словаря Ти продукции
+  $vocabulary = taxonomy_vocabulary_machine_name_load('shop_product_type');
   taxonomy_vocabulary_delete($vocabulary->vid);
 }
 
@@ -167,6 +180,21 @@ function mvc_example_enable() {
       )
     ],
     [
+      'field_name' => 'product_type',
+      'type' => 'taxonomy_term_reference',
+      'entity' => 'node',
+      'bundle' => 'products',
+      'label' => 'Тип продукции',
+      'settings' => array(
+        'allowed_values' => array(
+          array(
+            'vocabulary' => 'shop_product_type',
+            'parent' => 0
+          )
+        )
+      )
+    ],
+    [
       'field_name' => 'product_expiration_date',
       'type' => 'text',
       'entity' => 'node',
@@ -235,6 +263,11 @@ function mvc_example_disable() {
     ],
     [
       'field_name' => 'product_brand',
+      'entity_type' => 'node',
+      'bundle' => 'products',
+    ],
+    [
+      'field_name' => 'product_type',
       'entity_type' => 'node',
       'bundle' => 'products',
     ],
