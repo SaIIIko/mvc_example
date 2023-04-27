@@ -152,6 +152,21 @@ function mvc_example_enable() {
       )
     ],
     [
+      'field_name' => 'product_brand',
+      'type' => 'taxonomy_term_reference',
+      'entity' => 'node',
+      'bundle' => 'products',
+      'label' => 'Бренд',
+      'settings' => array(
+        'allowed_values' => array(
+          array(
+            'vocabulary' => 'shop_brands',
+            'parent' => 0
+          )
+        )
+      )
+    ],
+    [
       'field_name' => 'product_expiration_date',
       'type' => 'text',
       'entity' => 'node',
@@ -215,6 +230,11 @@ function mvc_example_disable() {
     ],
     [
       'field_name' => 'product_taste',
+      'entity_type' => 'node',
+      'bundle' => 'products',
+    ],
+    [
+      'field_name' => 'product_brand',
       'entity_type' => 'node',
       'bundle' => 'products',
     ],
