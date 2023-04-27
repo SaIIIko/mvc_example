@@ -60,6 +60,11 @@ function mvc_example_menu() {
   return $items;
 }
 
+/**
+ * test
+ *
+ * @return void
+ */
 function mvc_example_preprocess_page() {
   $rc = new ReflectionClass('Product');
 
