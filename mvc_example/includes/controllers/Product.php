@@ -10,27 +10,6 @@ abstract class Product implements ProductInterface {
   protected $id;
 
   /**
-   * The product name.
-   *
-   * @var string
-   */
-  protected $name;
-
-  /**
-   * The product price.
-   *
-   * @var null|int
-   */
-  protected $price;
-
-  /**
-   * The product brand.
-   *
-   * @var null|string
-   */
-  protected $brand;
-
-  /**
    * Produce constructor.
    *
    * @param int $id
@@ -48,6 +27,7 @@ abstract class Product implements ProductInterface {
   }
 
   /**
+   * Get product name
    * @return string
    */
   public function getName() {
@@ -61,6 +41,7 @@ abstract class Product implements ProductInterface {
   }
 
   /**
+   * Get product price
    * @return null|int
    */
   public function getPrice() {
@@ -73,6 +54,7 @@ abstract class Product implements ProductInterface {
   }
 
   /**
+   * Get product brand
    * @return null|array
    */
   public function getBrand() {
@@ -81,8 +63,9 @@ abstract class Product implements ProductInterface {
       FROM {field_data_product_brand} pb
       INNER JOIN {taxonomy_term_data} t ON pb.product_brand_tid = t.tid
       WHERE entity_id = :nid",
-      array(':nid' => $this->id))->fetchAll();
+      array(':nid' => $this->id))->fetchAll(PDO::FETCH_ASSOC);
 
+    $result = reset($result);
     return $result;
   }
 }
