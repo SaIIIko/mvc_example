@@ -195,12 +195,19 @@ function mvc_example_enable() {
       )
     ],
     [
+      'field_name' => 'product_manufacture_date',
+      'type' => 'text',
+      'entity' => 'node',
+      'bundle' => 'products',
+      'label' => 'Дата изготовления'
+    ],
+    [
       'field_name' => 'product_expiration_date',
       'type' => 'text',
       'entity' => 'node',
       'bundle' => 'products',
-      'label' => 'Срок годности'
-    ],
+      'label' => 'Срок годности, дней'
+    ]
   ];
 
   foreach ($fields as $field) {
@@ -268,6 +275,11 @@ function mvc_example_disable() {
     ],
     [
       'field_name' => 'product_type',
+      'entity_type' => 'node',
+      'bundle' => 'products',
+    ],
+    [
+      'field_name' => 'product_manufacture_date',
       'entity_type' => 'node',
       'bundle' => 'products',
     ],
