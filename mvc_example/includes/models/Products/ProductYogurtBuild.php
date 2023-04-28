@@ -41,17 +41,6 @@ class ProductYogurtBuild extends Product {
     }
   }
 
-  public function test() {
-    $result =  db_query("
-      SELECT t.name,
-             ft.entity_id
-      FROM {taxonomy_term_data} t
-      LEFT JOIN {field_data_product_taste} ft ON t.tid = ft.entity_id
-      ")->fetchAll(PDO::FETCH_ASSOC);
-
-    return $result;
-  }
-
   /**
    * Get all product fields and push array to template
    *
