@@ -47,17 +47,17 @@ function mvc_example_menu() {
     'access arguments' => array('access content'),
   ];
 
+  $items['mvc_example/statistic/price'] = [
+    'type' => MENU_NORMAL_ITEM,
+    'title' => '',
+    'description' => 'Node type page',
+    'page callback' => 'StatisticPriceLoad::load',
+    'page arguments' => array(3),
+    'access callback' => TRUE,
+    'access arguments' => array('access content'),
+  ];
+
   return $items;
-}
-
-/**
- * Implements hook_preprocess().
- */
-function mvc_example_preprocess_page(&$variables) {
-
-  /*$test = new ProductYogurtBuild('51');
-
-  dpm($test->test());*/
 }
 
 /**
@@ -80,6 +80,10 @@ function mvc_example_theme() {
     ),
     'statistic_expiration_date_template' => array(
       'template' => 'includes/views/statistic-expiration-date',
+      'render element' => 'element',
+    ),
+    'statistic_price_template' => array(
+      'template' => 'includes/views/statistic-price',
       'render element' => 'element',
     ),
   );
