@@ -1,7 +1,17 @@
 <?php
 
+/**
+ * @file
+ * Class implements statistic data
+ */
+
 class StatisticTaste implements StatisticInterface {
 
+  /**
+   * Get product and taste names from db
+   *
+   * @return array|null
+   */
   public function request() {
     $result =  db_query("
       SELECT t.name,
