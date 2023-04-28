@@ -61,8 +61,24 @@ function mvc_example_menu() {
 }
 
 function mvc_example_preprocess_page() {
-  $test = new ProductBuild();
-  dpm($test);
+  $rc = new ReflectionClass('Product');
+
+  /**
+   * Get all methods from ProductBuild
+   */
+  dpm($rc->getMethods());
+
+  /**
+   * Check method
+   *
+   * @return bool
+   */
+  dpm($rc->hasMethod('getProductCustomFields'));
+
+  /**
+   * Get all class properties
+   */
+  dpm($rc->getProperties());
 }
 
 /**
