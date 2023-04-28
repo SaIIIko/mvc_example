@@ -15,6 +15,11 @@ files[] = includes/models/Statistic/StatisticTaste.php
 files[] = includes/models/Statistic/StatisticIsExpirationDate.php
 files[] = includes/models/Statistic/StatisticIsPrice.php
 
+files[] = includes/models/Install/ModuleInstall.php
+files[] = includes/models/Install/ModuleUninstall.php
+files[] = includes/models/Install/ModuleEnable.php
+files[] = includes/models/Install/ModuleDisable.php
+
 files[] = includes/controllers/Statistic/StatisticLoadInterface.php
 files[] = includes/controllers/Statistic/StatisticTasteLoad.php
 files[] = includes/controllers/Statistic/StatisticExpirationDateLoad.php

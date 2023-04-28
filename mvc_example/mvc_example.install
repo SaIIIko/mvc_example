@@ -7,93 +7,63 @@
 
 /**
  * Implements hook_install().
- * Создание типа материала products и словаря shop_taste
  *
  * @return void
  */
 function mvc_example_install() {
-  if (!in_array('products', node_type_get_names())) {
-    $type = array(
-      'type' => 'products',
-      'name' => st('Products'),
-      'base' => 'node_content',
-      'custom' => 1,
-      'modified' => 1,
-      'locked' => 0,
-      'title_label' => 'Товары'
-    );
 
-    $type = node_type_set_defaults($type);
-    node_type_save($type);
-    node_add_body_field($type);
-  }
+  /**
+   * Create node type 'products'
+   */
+  ModuleInstall::createNodeType('products', 'Products', 'Товары');
 
-  # Создание словаря таксономии Вкусы
-  if(!in_array('shop_taste', taxonomy_get_vocabularies())) {
-    $vocabulary = new stdClass();
-    $vocabulary->name = 'Вкусы';
-    $vocabulary->machine_name = "shop_taste";
-    $vocabulary->module = 'taxonomy';
-    taxonomy_vocabulary_save($vocabulary);
-  }
+  /**
+   * Create taxonomy vocabulary  'shop_taste'
+   */
+  ModuleInstall::createTaxonomyVocabulary('shop_taste', 'Вкусы');
 
-  # Создание словаря таксономии Бренды
-  if(!in_array('shop_brands', taxonomy_get_vocabularies())) {
-    $vocabulary = new stdClass();
-    $vocabulary->name = 'Бренды';
-    $vocabulary->machine_name = "shop_brands";
-    $vocabulary->module = 'taxonomy';
-    taxonomy_vocabulary_save($vocabulary);
-  }
+  /**
+   * Create taxonomy vocabulary  'shop_brands'
+   */
+  ModuleInstall::createTaxonomyVocabulary('shop_brands', 'Бренды');
 
-  # Создание словаря таксономии Тип продукции
-  if(!in_array('shop_product_type', taxonomy_get_vocabularies())) {
-    $vocabulary = new stdClass();
-    $vocabulary->name = 'Тип продукции';
-    $vocabulary->machine_name = "shop_product_type";
-    $vocabulary->module = 'taxonomy';
-    taxonomy_vocabulary_save($vocabulary);
-  }
+  /**
+   * Create taxonomy vocabulary  'shop_product_type'
+   */
+  ModuleInstall::createTaxonomyVocabulary('shop_product_type', 'Тип продукции');
 }
 
 /**
  * Implements hook_uninstall().
- * Удаление bundle и его контента при удалении модуля
- *
+
  * @return void
  * @throws Exception
  */
 function mvc_example_uninstall() {
-  // Node delete
-  $query = db_select('node', 'n')
-    ->fields('n', array('nid'))
-    ->condition('n.type', 'products');
-  $nids = $query->execute()->fetchCol();
 
-  if (!empty($nids)) {
-    node_delete_multiple($nids);
-  }
+  /**
+   * Delete node type products and nodes
+   */
+  ModuleUninstall::deleteNodeType('products');
 
-  node_type_delete('products');
-  drupal_flush_all_caches();
-  drupal_set_message('The content type "Products" has been deleted.');
+  /**
+   * Delete vocabulary shop_taste and terms
+   */
+  ModuleUninstall::deleteTaxonomyVocabulary('shop_taste');
 
-  # Удаление словаря Вкусы
-  $vocabulary = taxonomy_vocabulary_machine_name_load('shop_taste');
-  taxonomy_vocabulary_delete($vocabulary->vid);
+  /**
+   * Delete vocabulary shop_brands and terms
+   */
+  ModuleUninstall::deleteTaxonomyVocabulary('shop_brands');
 
-  # Удаление словаря Бренды
-  $vocabulary = taxonomy_vocabulary_machine_name_load('shop_brands');
-  taxonomy_vocabulary_delete($vocabulary->vid);
-
-  # Удаление словаря Ти продукции
-  $vocabulary = taxonomy_vocabulary_machine_name_load('shop_product_type');
-  taxonomy_vocabulary_delete($vocabulary->vid);
+  /**
+   * Delete vocabulary shop_product_type and terms
+   */
+  ModuleUninstall::deleteTaxonomyVocabulary('shop_product_type');
 }
 
 /**
  * Implements hook_enable().
- * Создание полей при включении модуля
  *
  * @return void
  * @throws FieldException
@@ -141,13 +111,6 @@ function mvc_example_enable() {
       'entity' => 'node',
       'bundle' => 'products',
       'label' => 'Жиры в 100 г'
-    ],
-    [
-      'field_name' => 'product_image',
-      'type' => 'image',
-      'entity' => 'node',
-      'bundle' => 'products',
-      'label' => 'Фото'
     ],
     [
       'field_name' => 'product_taste',
@@ -210,26 +173,17 @@ function mvc_example_enable() {
     ]
   ];
 
-  foreach ($fields as $field) {
-    field_create_field($field);
-
-    // Подключаем поле к нашему типу.
-    $instance = array(
-      'field_name' => $field['field_name'],
-      'entity_type' => $field['entity'],
-      'bundle' => $field['bundle'],
-      'label' => $field['label'],
-    );
-
-    field_create_instance($instance);
-  }
+  /**
+   * Add fields to nodes and terms
+   */
+  ModuleEnable::addFields($fields);
 }
 
 /**
  * Implements hook_disable()
- * Удаление полей при отключении модуля
  *
  * @return void
+ * @throws \Exception
  */
 function mvc_example_disable() {
   $fields = [
@@ -290,10 +244,10 @@ function mvc_example_disable() {
     ]
   ];
 
-  foreach ($fields as $instance) {
-    field_delete_instance($instance);
-    field_delete_field($instance['field_name']);
-  }
+  /**
+   * Remove all fields from array
+   */
+  ModuleDisable::removeFields($fields);
 }
 
 
