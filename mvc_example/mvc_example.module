@@ -60,7 +60,26 @@ function mvc_example_menu() {
   return $items;
 }
 
+function mvc_example_preprocess_page() {
+  $rc = new ReflectionClass('Product');
 
+  /**
+   * Get all methods from ProductBuild
+   */
+  dpm($rc->getMethods());
+
+  /**
+   * Check method
+   *
+   * @return bool
+   */
+  dpm($rc->hasMethod('getProductCustomFields'));
+
+  /**
+   * Get all class properties
+   */
+  dpm($rc->getProperties());
+}
 
 /**
  * Implements hook_theme().
