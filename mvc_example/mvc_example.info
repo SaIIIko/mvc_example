@@ -12,9 +12,12 @@ files[] = includes/models/Products/ProductYogurtBuild.php
 
 files[] = includes/models/Statistic/StatisticInterface.php
 files[] = includes/models/Statistic/StatisticTaste.php
+files[] = includes/models/Statistic/StatisticIsExpirationDate.php
 
 files[] = includes/controllers/Statistic/StatisticLoadInterface.php
 files[] = includes/controllers/Statistic/StatisticTasteLoad.php
+files[] = includes/controllers/Statistic/StatisticExpirationDateLoad.php
 
 files[] = includes/controllers/Products/ProductLoad.php
 files[] = includes/controllers/Products/ProductYogurtLoad.php
+

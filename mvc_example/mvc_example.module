@@ -30,8 +30,18 @@ function mvc_example_menu() {
   $items['mvc_example/statistic/all_taste'] = [
     'type' => MENU_NORMAL_ITEM,
     'title' => '',
-    'description' => 'Product yogurt page',
+    'description' => 'All taste page',
     'page callback' => 'StatisticTasteLoad::load',
+    'page arguments' => array(3),
+    'access callback' => TRUE,
+    'access arguments' => array('access content'),
+  ];
+
+  $items['mvc_example/statistic/expiration_date'] = [
+    'type' => MENU_NORMAL_ITEM,
+    'title' => '',
+    'description' => 'Is expiration date page',
+    'page callback' => 'StatisticExpirationDateLoad::load',
     'page arguments' => array(3),
     'access callback' => TRUE,
     'access arguments' => array('access content'),
@@ -66,6 +76,10 @@ function mvc_example_theme() {
     ),
     'statistic_taste_template' => array(
       'template' => 'includes/views/statistic-taste',
+      'render element' => 'element',
+    ),
+    'statistic_expiration_date_template' => array(
+      'template' => 'includes/views/statistic-expiration-date',
       'render element' => 'element',
     ),
   );
