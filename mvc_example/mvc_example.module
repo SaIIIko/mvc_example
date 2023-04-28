@@ -27,7 +27,27 @@ function mvc_example_menu() {
     'access arguments' => array('access content'),
   ];
 
+  $items['mvc_example/statistic/all_taste'] = [
+    'type' => MENU_NORMAL_ITEM,
+    'title' => '',
+    'description' => 'Product yogurt page',
+    'page callback' => 'StatisticTasteLoad::load',
+    'page arguments' => array(3),
+    'access callback' => TRUE,
+    'access arguments' => array('access content'),
+  ];
+
   return $items;
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function mvc_example_preprocess_page(&$variables) {
+
+  /*$test = new ProductYogurtBuild('51');
+
+  dpm($test->test());*/
 }
 
 /**
@@ -42,6 +62,10 @@ function mvc_example_theme() {
     ),
     'product_yogurt_template' => array(
       'template' => 'includes/views/product-yogurt',
+      'render element' => 'element',
+    ),
+    'statistic_taste_template' => array(
+      'template' => 'includes/views/statistic-taste',
       'render element' => 'element',
     ),
   );
