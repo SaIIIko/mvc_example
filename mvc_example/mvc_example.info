@@ -5,10 +5,16 @@ core = 7.x
 version = '7.x-1.0'
 project = 'mvc_example'
 
-files[] = includes/models/Product.php
-files[] = includes/models/ProductInterface.php
-files[] = includes/models/ProductBuild.php
-files[] = includes/models/ProductYogurtBuild.php
+files[] = includes/models/Products/Product.php
+files[] = includes/models/Products/ProductInterface.php
+files[] = includes/models/Products/ProductBuild.php
+files[] = includes/models/Products/ProductYogurtBuild.php
 
-files[] = includes/controllers/ProductLoad.php
-files[] = includes/controllers/ProductYogurtLoad.php
+files[] = includes/models/Statistic/StatisticInterface.php
+files[] = includes/models/Statistic/StatisticTaste.php
+
+files[] = includes/controllers/Statistic/StatisticLoadInterface.php
+files[] = includes/controllers/Statistic/StatisticTasteLoad.php
+
+files[] = includes/controllers/Products/ProductLoad.php
+files[] = includes/controllers/Products/ProductYogurtLoad.php
