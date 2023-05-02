@@ -60,6 +60,11 @@ function mvc_example_menu() {
   return $items;
 }
 
+function mvc_example_preprocess_page() {
+  $test = new ProductBuild();
+  dpm($test);
+}
+
 /**
  * Implements hook_theme().
  * Add templates for default and custom products
