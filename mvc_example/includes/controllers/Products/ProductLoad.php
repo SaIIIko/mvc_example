@@ -14,6 +14,7 @@ class ProductLoad {
    */
   public static function load($id) {
     $product = new ProductBuild($id);
-    return $product->buildFieldsArray();
+    $build_array = $product->buildFieldsArray();
+    return theme('product_template', array('data' => $build_array));
   }
 }

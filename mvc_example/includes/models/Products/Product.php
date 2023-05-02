@@ -11,13 +11,13 @@ abstract class Product implements ProductInterface {
    * The product id.
    * @var int
    */
-  protected $id;
+  private $id;
 
   /**
    * The product name.
    * @var string
    */
-  protected $name;
+  private $name;
 
   /**
    * Produce constructor.
@@ -143,6 +143,8 @@ abstract class Product implements ProductInterface {
       return 'end';
     }
   }
+
+
 
   /**
    * Displaying basic information if the object is called as a string

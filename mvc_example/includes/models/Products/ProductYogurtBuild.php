@@ -5,7 +5,7 @@
  * Class builder yogurt product type fields
  */
 
-class ProductYogurtBuild extends Product {
+class ProductYogurtBuild extends ProductBuild  {
 
   /**
    * Get specific fields from product yogurt
@@ -13,7 +13,6 @@ class ProductYogurtBuild extends Product {
    */
   public function getProductCustomFields() {
     $getProductType = $this->getProductType();
-
     if ($getProductType['name'] == 'Йогурт') {
       $result =  db_query("
       SELECT body.body_value,
@@ -33,31 +32,11 @@ class ProductYogurtBuild extends Product {
       INNER JOIN {field_data_product_taste} f6 ON n.nid = f6.entity_id
       INNER JOIN {field_data_product_weight} f7 ON n.nid = f7.entity_id
       WHERE n.nid = :nid",
-        array(':nid' => $this->id))->fetchAll(PDO::FETCH_ASSOC);
+        array(':nid' => $this->getId()))->fetchAll(PDO::FETCH_ASSOC);
 
       return reset($result);
     } else {
       return NULL;
     }
   }
-
-  /**
-   * Get all product fields and push array to template
-   *
-   * @return mixed
-   * @throws \Exception
-   */
-  public function buildFieldsArray() {
-    $fields_arr = $this->getProductCustomFields();
-    $fields_arr['id'] = $this->getId();
-    $fields_arr['title'] = $this->getName();
-    $fields_arr['brand'] = $this->getBrand();
-    $fields_arr['price'] = $this->getPrice();
-    $fields_arr['manufacture_date'] = $this->getManufactureDate();
-    $fields_arr['expiration_date'] = $this->getExpirationDate();
-
-    $output = theme('product_template', array('data' => $fields_arr));
-    return $output;
-  }
-
 }

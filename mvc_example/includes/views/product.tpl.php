@@ -37,7 +37,7 @@
         <?php endif; ?>
       </div>
     </div>
-    <?php if ($data['body_value']): ?>
+    <?php if (isset($data['body_value'])): ?>
       <div class="description-item">
         <div class="title">Описание:</div>
         <div class="value"><?php print $data['body_value'] ?></div>
